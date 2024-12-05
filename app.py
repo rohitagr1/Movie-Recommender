@@ -34,7 +34,7 @@ def recommend(movie):
         recommended_movies.append(movies_df.iloc[i[0]].title)
         recommended_movies_poster.append(fetch_poster(movie_id))
 
-    return recommended_movies, recommended_movies_poster  # Change: Return both names and posters
+    return recommended_movies, recommended_movies_poster  
 
 st.title('Movie Recommender System')
 
