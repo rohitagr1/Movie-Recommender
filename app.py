@@ -21,7 +21,7 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 def recommend(movie):
     if movie not in movies_list:
-        return ["Movie not found!"], []  # Change: Now returns two lists, one for names and one for posters
+        return ["Movie not found!"], []
 
     movie_index = movies_df[movies_df['title'] == movie].index[0]
     distance = similarity[movie_index]
@@ -31,8 +31,8 @@ def recommend(movie):
     recommended_movies_poster = []
     for i in m_list:
         movie_id = movies_df.iloc[i[0]].id
-        recommended_movies.append(movies_df.iloc[i[0]].title)  # Change: Append movie title to recommended_movies list
-        recommended_movies_poster.append(fetch_poster(movie_id))  # Change: Append movie poster URL to recommended_movies_poster list
+        recommended_movies.append(movies_df.iloc[i[0]].title)
+        recommended_movies_poster.append(fetch_poster(movie_id))
 
     return recommended_movies, recommended_movies_poster  # Change: Return both names and posters
 
@@ -45,7 +45,7 @@ selected_movie_name = st.selectbox(
 if st.button('Recommend'):
     names, posters = recommend(selected_movie_name)
 
-    if names == ["Movie not found!"]:  # Change: Check for the "Movie not found!" case
+    if names == ["Movie not found!"]:
         st.error("Movie not found!")
     else:
         col1, col2, col3, col4, col5 = st.columns(5)
