@@ -5,10 +5,13 @@ import requests
 import os
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+similarity = pickle.load(open('similarity.pkl', 'rb'))
+
 
 
 def fetch_poster(movie_id):
-    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key={TMDB_API_KEY}&language=en-US'.format(movie_id))
+    #response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key={TMDB_API_KEY}&language=en-US'.format(movie_id))
+    response = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US')
     data = response.json()
     return "https://image.tmdb.org/t/p/w500/"+ data['poster_path']
 
@@ -61,3 +64,7 @@ if st.button('Recommend'):
         with col5:
             st.text(names[4])
             st.image(posters[4])
+
+import os
+print("Current working directory:", os.getcwd())
+print("Files in the directory:", os.listdir())
